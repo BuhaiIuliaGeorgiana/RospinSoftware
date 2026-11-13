@@ -1,0 +1,26 @@
+{
+  "aoi_box_wsen": [
+    27.74,
+    45.58,
+    27.86,
+    45.68
+  ],
+  "aoi_area_km2": 104.0,
+  "buildings": 11780,
+  "buildings_footprint_ha": 118.2,
+  "roads_total_km": 154.5,
+  "roads_real_km": 129.6,
+  "roads_by_type_km": {
+    "residential": 83.1,
+    "unclassified": 20.5,
+    "secondary": 20.2,
+    "track": 19.3,
+    "service": 5.6,
+    "track_grade3": 5.6,
+    "living_street": 0.2,
+    "footway": 0.0
+  },
+  "farmland_polygons": 34,
+  "farmland_ha": 8991.6,
+  "farmland_pct_of_aoi": 86.4
+}

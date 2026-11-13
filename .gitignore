@@ -1,0 +1,19 @@
+# Python environment and caches
+.venv/
+venv/
+__pycache__/
+*.pyc
+
+# Editor settings
+.idea/
+.vscode/
+
+# Raw and intermediate data
+data/raw/
+*.shp.zip
+
+# Local files and OS junk
+.env
+*.log
+.DS_Store
+Thumbs.db
