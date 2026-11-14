@@ -1,19 +1,50 @@
-import { Link } from "react-router";
+import { Link , useNavigate} from "react-router";
 import {useState} from "react";
+import {register} from "../services/authService";
 function SignUpPage(){
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
     const [confirmPassword,setConfirmPassword] = useState("");
     const [error,setError] = useState("");
-    function handleSignUp(event){
+    const [message,setMessage] = useState("");
+    const [loading,setLoading] = useState(false);
+
+    const navigate = useNavigate();
+    async function handleSignUp(event){
         event.preventDefault();
-        if(password === confirmPassword){
-            console.log("Email:", email);
-            console.log("Login form submitted");
-            setError("");
-        }else{
-            setError("password and confirm password do not match!");
+
+        setError("");
+        setMessage("");
+        if(password !== confirmPassword){
+            setError("Passwords do not match.");
             return;
+        }
+        if(password.length < 6){
+            setError("Password must have at least 6 characters!");
+            return;
+        }
+
+        setLoading(true);
+
+
+        try{
+            const result = await register(email,password);
+
+            if (result.error){
+                setError(result.error.message);
+                return;
+            }
+            //session checking
+
+            if(result.data.session){
+                navigate("/");
+            }else{
+                setMessage("Check email confirmation link.");
+            }
+        }catch(err){
+            setError(err.message || "An unexpected error occured.");
+        }finally{
+            setLoading(false);
         }
     }
     return(
@@ -51,7 +82,9 @@ function SignUpPage(){
 
             <p>
                 Already have an account?
-                <Link to="/login">Log in</Link>
+                <Link to="/login" disabled = {loading} >
+                {loading ? "Logging in.." : "Log in"}
+                </Link>
             </p>
         </div>
     );
