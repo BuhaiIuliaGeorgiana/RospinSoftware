@@ -1,15 +1,36 @@
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { useState } from "react";
-
+import { login } from "../services/authService";
 
 function LoginPage() {
     const [email,setEmail] = useState("");
     const [password,setPassword] = useState("");
+    const [error, setError] = useState("");
+    const [loading, setLoading] = useState(false);
 
-    function handleLogin(event){
+    const navigate = useNavigate();
+    async function handleLogin(event){
         event.preventDefault();
+
+        setLoading(true)
         console.log("Email:", email);
         console.log("Login form submitted");
+        
+
+        try{
+            const result = await login(email,password)
+
+            if(result.error){
+                setError(result.error.message);
+                return;
+            }
+
+            navigate("/");
+        }catch(err){
+            setError(err.message || "An unexpected error occured.");
+        }finally{
+            setLoading(false);
+        }
     }
     return (
         <div>
@@ -32,7 +53,9 @@ function LoginPage() {
                             required
                             />
 
-                <button type="submit">Login</button>
+                <button type="submit" disabled = {loading} >
+                    {loading ? "Logging in..." : "Login"}
+                </button>
             </form>
 
             <p>
