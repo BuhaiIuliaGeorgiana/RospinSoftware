@@ -1,47 +1,32 @@
-import { Route, Routes,Navigate } from "react-router";
-import { useState, useEffect } from "react";
+import { Route, Routes, Navigate } from "react-router";
+import { useAuth } from "./hooks/useAuth";
 
-import {supabase} from "./config/supabase";
+import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
 import SignUpPage from "./pages/SignUpPage";
-import HomePage from "./pages/HomePage";
-function App() {
 
-    const [session,setSession] = useState(null);
+function App(){
 
-    const [checkingSession,SetCheckingSession] = useState(true);
+    const {user,loading} = useAuth();
 
-
-    useEffect(()=>
-        {
-            const response = supabase.auth.onAuthStateChange(
-              (event,newSession)=>{
-                console.log("Auth event:",event);
-
-                setSession(newSession);
-                SetCheckingSession(false);
-              });
-
-              const subscription = response.data.subscription;
-
-              return () => {
-                    subscription.unsubscribe();
-                };
-            }
-        ,[]);
-
-
-     if(checkingSession){
+    
+    if(loading){
         return <p>Checking session...</p>;
     }
 
-
-    return (
+    return(
         <Routes>
+            <Route path="/"
+                   element={user ? <HomePage/> : <Navigate to="/login" replace/>}
+            />
 
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/signup" element={session? <Navigate to="/" replace /> :<SignUpPage />} />
-            <Route path="/" element={ <HomePage />} />
+            <Route path="/login"
+                   element={user ? <Navigate to="/" replace/> : <LoginPage/>}
+            />
+
+            <Route path="/signup"
+                   element={user ? <Navigate to="/" replace/> : <SignUpPage/>}
+            />
         </Routes>
     );
 }
