@@ -1,0 +1,7 @@
+venv/
+.venv/
+__pycache__/
+.DS_Store
+data/dem/
+data/sentinel-1/
+data/ems/EMSR758_*/
