@@ -1,0 +1,113 @@
+{
+  "event_id": "pechea",
+  "name": "Pechea, Galati",
+  "source": "Copernicus EMS EMSR758, AOI 03 Pechea",
+  "aoi_bbox_wgs84": [
+    27.61,
+    45.46,
+    27.87,
+    45.74
+  ],
+  "clipped_to_bbox": true,
+  "crs": "EPSG:4326",
+  "note": "EMS a cartografiat doar in interiorul AOI 03; in afara lui nu stim, nu inseamna 'fara inundatie'.",
+  "files": {
+    "aoi": "ems_aoi03.geojson"
+  },
+  "products": {
+    "fep": {
+      "label": "First Estimate",
+      "post_event": [
+        {
+          "sensor": "Sentinel-1",
+          "acquired_at_utc": "2024-09-14T04:22:00Z",
+          "resolution": "20.0 m",
+          "ems_src_id": 1
+        }
+      ],
+      "pre_event_reference": [],
+      "elevation_sources": [],
+      "files": {
+        "flood": "ems_flood_fep_20240914.geojson"
+      },
+      "acquired_at_utc": "2024-09-14T04:22:00Z",
+      "flooded_area_ha_total": 1078.6,
+      "flooded_area_ha_in_bounds": 1078.6,
+      "polygons_in_bounds": 108
+    },
+    "del": {
+      "label": "Delineation",
+      "post_event": [
+        {
+          "sensor": "PAZ-1",
+          "acquired_at_utc": "2024-09-15T15:59:00Z",
+          "resolution": "3.01 m",
+          "ems_src_id": 3
+        }
+      ],
+      "pre_event_reference": [
+        {
+          "sensor": "Sentinel-2",
+          "acquired_at_utc": "2024-08-24T08:55:00Z",
+          "resolution": "10 m",
+          "ems_src_id": 2
+        }
+      ],
+      "elevation_sources": [
+        {
+          "name": "COP-DEM-EEA-10-R",
+          "year": "2019",
+          "resolution": "10.0 m"
+        },
+        {
+          "name": "FABDEM",
+          "year": "2020",
+          "resolution": "30.0 m"
+        }
+      ],
+      "files": {
+        "flood": "ems_flood_del_20240915.geojson",
+        "depth": "ems_depth_del_20240915.geojson"
+      },
+      "acquired_at_utc": "2024-09-15T15:59:00Z",
+      "flooded_area_ha_total": 866.7,
+      "flooded_area_ha_in_bounds": 866.7,
+      "polygons_in_bounds": 131
+    },
+    "monit1": {
+      "label": "Delineation Monitoring 1",
+      "post_event": [
+        {
+          "sensor": "COSMO-SkyMed Second Generation",
+          "acquired_at_utc": "2024-09-17T16:13:00Z",
+          "resolution": "3.0 m",
+          "ems_src_id": 4
+        }
+      ],
+      "pre_event_reference": [
+        {
+          "sensor": "Sentinel-2",
+          "acquired_at_utc": "2024-08-24T08:55:00Z",
+          "resolution": "10 m",
+          "ems_src_id": 2
+        }
+      ],
+      "elevation_sources": [
+        {
+          "name": "COP-DEM-EEA-10-R",
+          "year": "2019",
+          "resolution": "10.0 m"
+        }
+      ],
+      "files": {
+        "flood": "ems_flood_monit1_20240917.geojson",
+        "depth": "ems_depth_monit1_20240917.geojson",
+        "max_extent": "ems_max_extent_monit1_20240917.geojson"
+      },
+      "acquired_at_utc": "2024-09-17T16:13:00Z",
+      "flooded_area_ha_total": 427.4,
+      "flooded_area_ha_in_bounds": 427.4,
+      "polygons_in_bounds": 237
+    }
+  }
+}
